@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "currentLocale": "en",
+  "appName": "Driver",
+  "logIn": "Log In",
+  "login": "Login",
+  "phone": "Phone",
+  "password": "Password",
+  "defaultErrorMessage": "Something went wrong...",
+  "cancelButton": "Cancel"
+}
