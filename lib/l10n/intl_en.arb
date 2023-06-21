@@ -4,8 +4,9 @@
   "appName": "Driver",
   "logIn": "Log In",
   "login": "Login",
-  "phone": "Phone",
+  "name": "Name",
   "password": "Password",
   "defaultErrorMessage": "Something went wrong...",
-  "cancelButton": "Cancel"
+  "cancelButton": "Cancel",
+  "register": "Register"
 }
