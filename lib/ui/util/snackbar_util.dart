@@ -5,6 +5,7 @@ extension SnackBarUtil on BuildContext {
     String message, {
     SnackBarAction? action,
   }) {
+    ScaffoldMessenger.of(this).hideCurrentSnackBar();
     return ScaffoldMessenger.of(this).showSnackBar(SnackBar(
       content: Text(message),
       action: action,
