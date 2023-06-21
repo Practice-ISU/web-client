@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_hoster/di/injector.dart';
 import 'package:image_hoster/features/_common/data/session_store.dart';
+import 'package:image_hoster/features/_common/data/util/dio_exception.dart';
 import 'package:image_hoster/features/auth/data/auth_repository.dart';
-import 'package:image_hoster/generated/l10n.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -24,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(ProgressLoginState(false));
       emit(SuccessLoginState());
     } catch (e) {
-      emit(ErrorLoginState(S.current.defaultErrorMessage));
+      emit(ErrorLoginState(createErrorMessage(e)));
     }
   }
 
@@ -36,7 +36,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(ProgressLoginState(false));
       emit(SuccessLoginState());
     } catch (e) {
-      emit(ErrorLoginState(S.current.defaultErrorMessage));
+      emit(ErrorLoginState(createErrorMessage(e)));
     }
   }
 }
