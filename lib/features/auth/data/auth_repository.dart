@@ -1,6 +1,6 @@
 import 'package:image_hoster/features/_common/data/api/stock_rest_api.dart';
-import 'package:image_hoster/features/auth/data/dto/auth_request.dart';
-import 'package:image_hoster/features/auth/data/dto/auth_response.dart';
+import 'package:image_hoster/features/auth/data/request/auth_request.dart';
+import 'package:image_hoster/features/auth/data/response/auth_response.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton()

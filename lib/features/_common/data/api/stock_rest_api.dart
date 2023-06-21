@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:image_hoster/features/auth/data/dto/auth_request.dart';
-import 'package:image_hoster/features/auth/data/dto/auth_response.dart';
+import 'package:image_hoster/features/auth/data/request/auth_request.dart';
+import 'package:image_hoster/features/auth/data/response/auth_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'stock_rest_api.g.dart';
