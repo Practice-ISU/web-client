@@ -5,13 +5,13 @@ import 'package:image_hoster/features/_common/data/util/dio_exception.dart';
 import 'package:image_hoster/features/auth/data/auth_repository.dart';
 
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  late final AuthRepository _authRepository = Injector.instance.resolve();
 
-  late final AuthRepository _authRepository = Injector.instance.resolve<AuthRepository>();
-
-  LoginBloc(): super(ProgressLoginState(false)) {
+  LoginBloc() : super(ProgressLoginState(false)) {
     on<SendLoginEvent>(_sendLogin);
     on<RegisterEvent>(_register);
   }

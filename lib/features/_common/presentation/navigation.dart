@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 class Routes {
   static const login = '/login';
-  static const register = '/register';
+  static const folders = '/folders';
 }
 
 class Navigation {
@@ -19,7 +19,7 @@ class Navigation {
 
   login() => context.go(Routes.login);
 
-  register() => context.go(Routes.register);
+  folders() => context.go(Routes.folders);
 }
 
 extension ContextNavigator on BuildContext {
