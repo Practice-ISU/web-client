@@ -17,14 +17,7 @@ final appTheme = ThemeData(
       onSurface: AppColors.gray.shade300,
     ),
     appBarTheme: AppBarTheme(
-        toolbarHeight: Dimens.xxl,
-        color: AppColors.defaultBackground,
-        elevation: 0,
-        titleSpacing: 0,
-        titleTextStyle: appTextTheme.h3,
-        centerTitle: true,
-        toolbarTextStyle: appTextTheme.buttonMedium
-            ?.copyWith(color: AppColors.primary, leadingDistribution: TextLeadingDistribution.even),
+        color: AppColors.gray.shade800,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: AppColors.defaultBackground,
           statusBarIconBrightness: Brightness.light,
@@ -57,9 +50,11 @@ final appTheme = ThemeData(
         elevation: const MaterialStatePropertyAll(0),
         backgroundColor: MaterialStatePropertyAll(AppColors.gray.shade700),
         foregroundColor: const MaterialStatePropertyAll(Colors.white),
-        padding: const MaterialStatePropertyAll(EdgeInsets.all(Dimens.md + Dimens.xs)),
+        padding: const MaterialStatePropertyAll(
+            EdgeInsets.all(Dimens.md + Dimens.xs)),
         shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimens.sm)),
+          RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(Dimens.sm)),
         ),
         side: const MaterialStatePropertyAll(
           BorderSide(width: 0, color: Colors.transparent),

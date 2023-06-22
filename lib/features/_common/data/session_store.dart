@@ -32,6 +32,11 @@ class SessionStore {
     return await prefs.setString(tokenKey, token);
   }
 
+  Future<bool> deleteAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return await prefs.remove(tokenKey);
+  }
+
   Future<void> reset() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(tokenKey);
