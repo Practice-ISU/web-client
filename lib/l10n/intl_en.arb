@@ -8,5 +8,6 @@
   "password": "Password",
   "defaultErrorMessage": "Something went wrong...",
   "cancelButton": "Cancel",
-  "register": "Register"
+  "register": "Register",
+  "folders": "Folders"
 }
