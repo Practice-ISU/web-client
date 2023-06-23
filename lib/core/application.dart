@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_hoster/features/_common/presentation/router.dart';
 import 'package:image_hoster/generated/l10n.dart';
@@ -23,7 +24,7 @@ class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: createAppRouter(),
+      routerConfig: AppRouter(BlocProvider.of(context)).router,
       theme: appTheme.copyWith(textTheme: GoogleFonts.archivoTextTheme(appTheme.textTheme)),
       locale: S.delegate.supportedLocales.first,
       supportedLocales: S.delegate.supportedLocales,
