@@ -8,4 +8,6 @@ class AppIcons {
   );
 
   static final logout = SvgPicture.asset('assets/icons/logout.svg');
+
+  static final arrowBack = SvgPicture.asset('assets/icons/arrow_back.svg');
 }

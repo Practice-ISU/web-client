@@ -9,5 +9,6 @@
   "defaultErrorMessage": "Something went wrong...",
   "cancelButton": "Cancel",
   "register": "Register",
-  "folders": "Folders"
+  "folders": "Folders",
+  "imageLoadError": "Loading error"
 }
