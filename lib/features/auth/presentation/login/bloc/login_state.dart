@@ -8,8 +8,6 @@ class ProgressLoginState extends LoginState {
   ProgressLoginState(this.progress);
 }
 
-class SuccessLoginState extends LoginState {}
-
 class ErrorLoginState extends LoginState {
   final String message;
 

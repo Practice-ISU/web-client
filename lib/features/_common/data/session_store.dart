@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SessionStore {
+class SessionStore with ChangeNotifier {
   static const String tokenKey = 'accessToken';
 
   SessionStore._();
@@ -15,26 +16,32 @@ class SessionStore {
 
   String? _token;
 
-  get isLoggedIn async {
+  Future<bool> get isLoggedIn async {
     await _ensureLoadPreferences();
 
     return _token?.isNotEmpty ?? false;
   }
 
-  get accessToken async {
+  Future<String> get accessToken async {
     await _ensureLoadPreferences();
 
-    return _token;
+    return _token ?? '';
   }
 
   Future<bool> setAccessToken(String token) async {
+    _token = token;
     final prefs = await SharedPreferences.getInstance();
-    return await prefs.setString(tokenKey, token);
+    final result = await prefs.setString(tokenKey, token);
+    notifyListeners();
+    return result;
   }
 
   Future<bool> deleteAccessToken() async {
+    _token = null;
     final prefs = await SharedPreferences.getInstance();
-    return await prefs.remove(tokenKey);
+    final result = await prefs.remove(tokenKey);
+    notifyListeners();
+    return result;
   }
 
   Future<void> reset() async {

@@ -19,7 +19,3 @@ class LoadedFoldersState extends FoldersState {
 
   LoadedFoldersState(this.folders);
 }
-
-class LogoutFoldersState extends FoldersState {
-  LogoutFoldersState();
-}

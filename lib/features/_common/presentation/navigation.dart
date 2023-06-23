@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class Routes {
-  static const login = '/login';
-  static const folders = '/folders';
+  static const login = 'login';
+  static const folders = 'folders';
+  static const images = 'images';
 }
 
 class Navigation {
@@ -17,9 +18,12 @@ class Navigation {
     }
   }
 
-  login() => context.go(Routes.login);
+  login() => context.goNamed(Routes.login);
 
-  folders() => context.go(Routes.folders);
+  folders() => context.goNamed(Routes.folders);
+
+  images(int folderId) => context.goNamed(Routes.images,
+      pathParameters: {'folderId': folderId.toString()});
 }
 
 extension ContextNavigator on BuildContext {

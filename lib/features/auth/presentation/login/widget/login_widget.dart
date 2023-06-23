@@ -34,14 +34,14 @@ class _LoginWidgetState extends State<LoginWidget> {
   Widget build(BuildContext context) {
     return ScreenConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
-        setState(() {
-          if (state is ProgressLoginState) {
+        if (state is ProgressLoginState) {
+          setState(() {
             inProgress = state.progress;
-          }
-          if (state is ErrorLoginState) {
-            context.showSnackBar(state.message);
-          }
-        });
+          });
+        }
+        if (state is ErrorLoginState) {
+          context.showSnackBar(state.message);
+        }
       },
       builder: (context, state) => Center(
         child: Container(
@@ -94,6 +94,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
         ),
       ),
+      showProgress: (state) => inProgress,
     );
   }
 
@@ -107,7 +108,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   VoidCallback? _onRegisterPressed() => _canLogin()
       ? () {
           BlocProvider.of<LoginBloc>(context).add(
-              SendLoginEvent(nameController.text, passwordController.text));
+              RegisterEvent(nameController.text, passwordController.text));
         }
       : null;
 

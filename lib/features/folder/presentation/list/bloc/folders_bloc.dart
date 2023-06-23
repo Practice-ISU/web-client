@@ -32,6 +32,5 @@ class FoldersBloc extends Bloc<FoldersEvent, FoldersState> {
 
   _logout(LogoutFoldersEvent event, Emitter<FoldersState> emit) async {
     await _authRepository.logout();
-    emit(LogoutFoldersState());
   }
 }

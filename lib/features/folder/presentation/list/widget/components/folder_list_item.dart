@@ -17,24 +17,31 @@ class FolderListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onPressed?.call(folder);
-      },
-      borderRadius: BorderRadius.circular(Dimens.sm),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AppIcons.folder,
-          Gap.sm,
-          Expanded(
-            child: Text(
-              folder.name,
-              style: Theme.of(context).textTheme.h2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          )
-        ],
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(Dimens.sm),
+        border:
+            Border.all(width: 1, color: Theme.of(context).colorScheme.surface),
+      ),
+      child: InkWell(
+        onTap: () {
+          onPressed?.call(folder);
+        },
+        borderRadius: BorderRadius.circular(Dimens.sm),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppIcons.folder,
+            Gap.sm,
+            Expanded(
+              child: Text(
+                folder.name,
+                style: Theme.of(context).textTheme.h2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

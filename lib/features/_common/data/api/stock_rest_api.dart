@@ -4,6 +4,8 @@ import 'package:image_hoster/features/auth/data/request/auth_request.dart';
 import 'package:image_hoster/features/auth/data/response/auth_response.dart';
 import 'package:image_hoster/features/folder/data/model/folder.dart';
 import 'package:image_hoster/features/folder/data/request/add_folder_request.dart';
+import 'package:image_hoster/features/image/data/request/get_images_request.dart';
+import 'package:image_hoster/features/image/data/response/get_images_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'stock_rest_api.g.dart';
@@ -33,4 +35,7 @@ abstract class StockRestApi {
 
   @POST('/create-folder')
   Future<void> addFolder(@Body() AddFolderRequest request);
+
+  @POST('/folders/get')
+  Future<GetImagesResponse> getImages(@Body() GetImagesRequest request);
 }

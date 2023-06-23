@@ -34,9 +34,6 @@ class _FoldersWidgetState extends State<FoldersWidget> {
         if (state is ErrorFoldersState) {
           context.showSnackBar(state.message);
         }
-        if (state is LogoutFoldersState) {
-          context.navigation.login();
-        }
         if (state is LoadedFoldersState) {
           setState(() {
             folders.clear();
@@ -56,16 +53,20 @@ class _FoldersWidgetState extends State<FoldersWidget> {
         ],
       ),
       builder: (context, state) {
-        final int count = (MediaQuery.of(context).size.width / (200 + Dimens.sm)).floor();
+        final int count =
+            (MediaQuery.of(context).size.width / (200 + Dimens.md)).floor();
         return GridView.count(
           padding: const EdgeInsets.all(Dimens.md),
-          crossAxisSpacing: Dimens.sm,
+          mainAxisSpacing: Dimens.md,
+          crossAxisSpacing: Dimens.md,
           crossAxisCount: count,
           children: folders
               .map(
                 (e) => FolderListItem(
                   folder: e,
-                  onPressed: _onFolderPressed,
+                  onPressed: (folder) {
+                    _onFolderPressed(folder);
+                  },
                 ),
               )
               .toList(),
@@ -79,5 +80,7 @@ class _FoldersWidgetState extends State<FoldersWidget> {
     BlocProvider.of<FoldersBloc>(context).add(LogoutFoldersEvent());
   }
 
-  _onFolderPressed(Folder folder) {}
+  _onFolderPressed(Folder folder) {
+    context.navigation.images(folder.id);
+  }
 }
