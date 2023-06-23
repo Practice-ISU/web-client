@@ -58,7 +58,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 onChanged: (_) {
                   setState(() {});
                 },
-                keyboardType: TextInputType.none,
+                keyboardType: TextInputType.text,
                 autofocus: true,
                 controller: nameController,
                 enabled: !inProgress,
@@ -69,7 +69,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 onChanged: (_) {
                   setState(() {});
                 },
-                keyboardType: TextInputType.none,
+                keyboardType: TextInputType.text,
                 autofocus: true,
                 controller: passwordController,
                 enabled: !inProgress,
