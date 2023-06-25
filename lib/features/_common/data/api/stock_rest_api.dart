@@ -4,7 +4,10 @@ import 'package:image_hoster/features/auth/data/request/auth_request.dart';
 import 'package:image_hoster/features/auth/data/response/auth_response.dart';
 import 'package:image_hoster/features/folder/data/model/folder.dart';
 import 'package:image_hoster/features/folder/data/request/add_folder_request.dart';
+import 'package:image_hoster/features/folder/data/request/delete_folder_request.dart';
+import 'package:image_hoster/features/image/data/request/delete_image_request.dart';
 import 'package:image_hoster/features/image/data/request/get_images_request.dart';
+import 'package:image_hoster/features/image/data/request/upload_image_request.dart';
 import 'package:image_hoster/features/image/data/response/get_images_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -38,4 +41,13 @@ abstract class StockRestApi {
 
   @POST('/folders/get')
   Future<GetImagesResponse> getImages(@Body() GetImagesRequest request);
+
+  @POST('/upload-image')
+  Future<GetImagesResponse> uploadImage(@Body() UploadImageRequest request);
+
+  @POST('/delete-image')
+  Future<GetImagesResponse> deleteImage(@Body() DeleteImageRequest request);
+
+  @POST('/delete-folder')
+  Future<GetImagesResponse> deleteFolder(@Body() DeleteFolderRequest request);
 }

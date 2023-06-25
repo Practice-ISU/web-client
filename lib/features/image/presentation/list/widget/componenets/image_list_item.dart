@@ -7,11 +7,13 @@ import 'package:image_hoster/ui/kit/icons.dart';
 class ImageListItem extends StatelessWidget {
   final ImageItem imageItem;
   final ValueChanged<ImageItem>? onPressed;
+  final ValueChanged<ImageItem>? onLongPress;
 
   const ImageListItem({
     Key? key,
     required this.imageItem,
     this.onPressed,
+    this.onLongPress,
   }) : super(key: key);
 
   @override
@@ -29,7 +31,7 @@ class ImageListItem extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.cover,
                 child: Image.network(
-                  imageItem.originalFile,
+                  imageItem.original,
                   errorBuilder: (context, child, progress) => Padding(
                     padding: const EdgeInsets.all(Dimens.md),
                     child: AppIcons.error,
@@ -66,6 +68,9 @@ class ImageListItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimens.sm),
                   onTap: () {
                     onPressed?.call(imageItem);
+                  },
+                  onLongPress: () {
+                    onLongPress?.call(imageItem);
                   },
                 ),
               ),

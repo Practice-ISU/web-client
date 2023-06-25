@@ -5,12 +5,12 @@ part 'image_item.g.dart';
 @JsonSerializable()
 class ImageItem {
   final int id;
-  final String originalFile;
-  final String paintedFile;
+  final String original;
+  final String painted;
 
-  ImageItem(this.id, this.originalFile, this.paintedFile);
+  ImageItem(this.id, this.original, this.painted);
 
-  factory ImageItem.original(int id, String file) => ImageItem(id, file, file);
+  factory ImageItem.fromOriginal(int id, String file) => ImageItem(id, file, file);
 
   factory ImageItem.fromJson(Map<String, dynamic> json) =>
       _$ImageItemFromJson(json);

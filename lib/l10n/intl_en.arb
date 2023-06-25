@@ -14,5 +14,10 @@
   "upload": "Upload",
   "clear": "Clear",
   "back": "Back",
-  "next": "Next"
+  "next": "Next",
+  "addFolder": "Add folder",
+  "yes": "Yes",
+  "no": "No",
+  "deleteFolder": "Delete folder",
+  "deleteImage": "Delete image"
 }

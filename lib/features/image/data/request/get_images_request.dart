@@ -4,10 +4,10 @@ part 'get_images_request.g.dart';
 
 @JsonSerializable()
 class GetImagesRequest {
-  final String accessToken;
+  final String token;
   final int folderId;
 
-  GetImagesRequest(this.accessToken, this.folderId);
+  GetImagesRequest(this.token, this.folderId);
 
   factory GetImagesRequest.fromJson(Map<String, dynamic> json) => _$GetImagesRequestFromJson(json);
 

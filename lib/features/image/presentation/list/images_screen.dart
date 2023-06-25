@@ -11,7 +11,7 @@ class ImagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ImagesBloc()..add(LoadImagesEvent(folderId)),
+      create: (context) => ImagesBloc(folderId)..add(LoadImagesEvent()),
       child: const ImagesWidget(),
     );
   }
