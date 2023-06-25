@@ -8,11 +8,13 @@ import 'package:image_hoster/ui/theme/app_text_theme.dart';
 class FolderListItem extends StatelessWidget {
   final Folder folder;
   final ValueChanged<Folder>? onPressed;
+  final ValueChanged<Folder>? onLongPress;
 
   const FolderListItem({
     Key? key,
     required this.folder,
     this.onPressed,
+    this.onLongPress,
   }) : super(key: key);
 
   @override
@@ -49,6 +51,9 @@ class FolderListItem extends StatelessWidget {
               child: InkWell(
                   onTap: () {
                     onPressed?.call(folder);
+                  },
+                  onLongPress: () {
+                    onLongPress?.call(folder);
                   },
                   borderRadius: BorderRadius.circular(Dimens.sm)),
             )),

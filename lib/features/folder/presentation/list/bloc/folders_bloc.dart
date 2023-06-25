@@ -16,6 +16,8 @@ class FoldersBloc extends Bloc<FoldersEvent, FoldersState> {
 
   FoldersBloc() : super(ProgressFoldersState(true)) {
     on<LoadFoldersEvent>(_load);
+    on<AddFolderEvent>(_add);
+    on<DeleteFolderEvent>(_delete);
     on<LogoutFoldersEvent>(_logout);
   }
 
@@ -30,7 +32,29 @@ class FoldersBloc extends Bloc<FoldersEvent, FoldersState> {
     emit(ProgressFoldersState(false));
   }
 
+  _add(AddFolderEvent event, Emitter<FoldersState> emit) async {
+    emit(ProgressFoldersState(true));
+    try {
+      await _folderRepository.addFolder(event.name);
+      add(LoadFoldersEvent());
+    } catch (e) {
+      emit(ErrorFoldersState(createErrorMessage(e)));
+    }
+    emit(ProgressFoldersState(false));
+  }
+
   _logout(LogoutFoldersEvent event, Emitter<FoldersState> emit) async {
     await _authRepository.logout();
+  }
+
+  _delete(DeleteFolderEvent event, Emitter<FoldersState> emit) async {
+    emit(ProgressFoldersState(true));
+    try {
+      await _folderRepository.deleteFolder(event.folder.id);
+      add(LoadFoldersEvent());
+    } catch (e) {
+      emit(ErrorFoldersState(createErrorMessage(e)));
+    }
+    emit(ProgressFoldersState(false));
   }
 }

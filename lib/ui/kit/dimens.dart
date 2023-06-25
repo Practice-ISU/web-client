@@ -8,5 +8,7 @@ class Dimens {
   static const xxl = 48.0;
   static const xxxl = 64.0;
 
+  static const appBarSplashRadius = 28.0;
+
   static const drawerProfilePictureSize = 40.0;
 }
