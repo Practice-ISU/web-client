@@ -4,10 +4,10 @@ part 'add_folder_request.g.dart';
 
 @JsonSerializable()
 class AddFolderRequest {
-  final String accessToken;
+  final String token;
   final String name;
 
-  AddFolderRequest(this.accessToken, this.name);
+  AddFolderRequest(this.token, this.name);
 
   factory AddFolderRequest.fromJson(Map<String, dynamic> json) => _$AddFolderRequestFromJson(json);
 

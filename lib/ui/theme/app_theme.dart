@@ -17,7 +17,9 @@ final appTheme = ThemeData(
       onSurface: AppColors.gray.shade300,
     ),
     appBarTheme: AppBarTheme(
+        toolbarHeight: 72,
         color: AppColors.gray.shade800,
+        titleSpacing: Dimens.md,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: AppColors.defaultBackground,
           statusBarIconBrightness: Brightness.light,

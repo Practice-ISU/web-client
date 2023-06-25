@@ -4,9 +4,9 @@ part 'access_token_request.g.dart';
 
 @JsonSerializable()
 class AccessTokenRequest {
-  final String accessToken;
+  final String token;
 
-  AccessTokenRequest(this.accessToken);
+  AccessTokenRequest(this.token);
 
   factory AccessTokenRequest.fromJson(Map<String, dynamic> json) => _$AccessTokenRequestFromJson(json);
 
