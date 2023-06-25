@@ -7,6 +7,7 @@ import 'package:image_hoster/features/_common/presentation/navigation_state.dart
 import 'package:image_hoster/features/auth/presentation/login/login_screen.dart';
 import 'package:image_hoster/features/folder/presentation/list/folders_screen.dart';
 import 'package:image_hoster/features/image/presentation/list/images_screen.dart';
+import 'package:image_hoster/features/image/presentation/upload/upload_image_screen.dart';
 
 class AppRouter {
   NavigationCubit navigationCubit;
@@ -39,6 +40,13 @@ class AppRouter {
               builder: (context, state) => ImagesScreen(
                 folderId: int.parse(state.pathParameters['folderId']!),
               ),
+            ),
+            GoRoute(
+              path: 'images/:folderId/upload',
+              name: Routes.uploadImage,
+              builder: (context, state) => UploadImageScreen(
+                folderId: int.parse(state.pathParameters['folderId']!),
+              ),
             )
           ],
         ),
@@ -47,7 +55,7 @@ class AppRouter {
         if (state.location == '/') {
           return '/folders';
         }
-        if (state.location.contains('/login')) {
+        if (state.location.startsWith('/login')) {
           if (navigationCubit.state is AuthorizedNavigationState) {
             return '/folders';
           }

@@ -13,8 +13,16 @@ class AuthRepository {
   Future<AuthResponse> login(String name, String password) =>
       _api.login(AuthRequest(name, password));
 
+/*
   Future<AuthResponse> register(String name, String password) =>
       _api.register(AuthRequest(name, password));
+*/
+
+  Future<AuthResponse> register(String name, String password) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return const AuthResponse('kek');
+  }
+
 
   Future<bool> logout() => SessionStore.instance.deleteAccessToken();
 }

@@ -10,5 +10,9 @@
   "cancelButton": "Cancel",
   "register": "Register",
   "folders": "Folders",
-  "imageLoadError": "Loading error"
+  "imageLoadError": "Loading error",
+  "upload": "Upload",
+  "clear": "Clear",
+  "back": "Back",
+  "next": "Next"
 }

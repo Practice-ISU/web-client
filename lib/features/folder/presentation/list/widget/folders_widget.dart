@@ -45,6 +45,12 @@ class _FoldersWidgetState extends State<FoldersWidget> {
         title: Text(S.current.folders),
         actions: [
           IconButton(
+            onPressed: () {
+              _onNewFolderPressed();
+            },
+            icon: AppIcons.plusCircle,
+          ),
+          IconButton(
             icon: AppIcons.logout,
             onPressed: () {
               _onLogoutPressed();
@@ -54,7 +60,10 @@ class _FoldersWidgetState extends State<FoldersWidget> {
       ),
       builder: (context, state) {
         final int count =
-            (MediaQuery.of(context).size.width / (200 + Dimens.md)).floor();
+        (MediaQuery
+            .of(context)
+            .size
+            .width / (200 + Dimens.md)).floor();
         return GridView.count(
           padding: const EdgeInsets.all(Dimens.md),
           mainAxisSpacing: Dimens.md,
@@ -62,13 +71,14 @@ class _FoldersWidgetState extends State<FoldersWidget> {
           crossAxisCount: count,
           children: folders
               .map(
-                (e) => FolderListItem(
+                (e) =>
+                FolderListItem(
                   folder: e,
                   onPressed: (folder) {
                     _onFolderPressed(folder);
                   },
                 ),
-              )
+          )
               .toList(),
         );
       },
@@ -83,4 +93,6 @@ class _FoldersWidgetState extends State<FoldersWidget> {
   _onFolderPressed(Folder folder) {
     context.navigation.images(folder.id);
   }
+
+  _onNewFolderPressed() {}
 }

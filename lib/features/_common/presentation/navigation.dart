@@ -5,6 +5,7 @@ class Routes {
   static const login = 'login';
   static const folders = 'folders';
   static const images = 'images';
+  static const uploadImage = 'upload-image';
 }
 
 class Navigation {
@@ -23,6 +24,9 @@ class Navigation {
   folders() => context.goNamed(Routes.folders);
 
   images(int folderId) => context.goNamed(Routes.images,
+      pathParameters: {'folderId': folderId.toString()});
+
+  uploadImage(int folderId) => context.goNamed(Routes.uploadImage,
       pathParameters: {'folderId': folderId.toString()});
 }
 

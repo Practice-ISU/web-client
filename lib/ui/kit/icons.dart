@@ -10,4 +10,12 @@ class AppIcons {
   static final logout = SvgPicture.asset('assets/icons/logout.svg');
 
   static final arrowBack = SvgPicture.asset('assets/icons/arrow_back.svg');
+
+  static final error = SvgPicture.asset(
+    'assets/icons/error.svg',
+    width: 128,
+    height: 128,
+  );
+
+  static final plusCircle = SvgPicture.asset('assets/icons/plus_circle.svg');
 }

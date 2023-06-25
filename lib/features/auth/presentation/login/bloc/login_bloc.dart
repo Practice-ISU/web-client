@@ -20,7 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(ProgressLoginState(true));
     try {
       final result = await _authRepository.login(event.name, event.password);
-      SessionStore.instance.setAccessToken(result.token);
+      await SessionStore.instance.setAccessToken(result.token);
     } catch (e) {
       emit(ErrorLoginState(createErrorMessage(e)));
     }
@@ -29,13 +29,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   _register(RegisterEvent event, Emitter<LoginState> emit) async {
     emit(ProgressLoginState(true));
-    await Future.delayed(const Duration(seconds: 1));
-    await SessionStore.instance.setAccessToken(event.name);
-    emit(ProgressLoginState(false));
-    return;
-    emit(ProgressLoginState(true));
     try {
-      final result = await _authRepository.login(event.name, event.password);
+      final result = await _authRepository.register(event.name, event.password);
       await SessionStore.instance.setAccessToken(result.token);
     } catch (e) {
       emit(ErrorLoginState(createErrorMessage(e)));

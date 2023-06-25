@@ -58,6 +58,12 @@ class _ImagesWidgetState extends State<ImagesWidget> {
               title: Text(folder!.name),
               actions: [
                 IconButton(
+                  onPressed: () {
+                    _onNewImagePressed();
+                  },
+                  icon: AppIcons.plusCircle,
+                ),
+                IconButton(
                   icon: AppIcons.logout,
                   onPressed: () {
                     _onLogoutPressed();
@@ -92,5 +98,11 @@ class _ImagesWidgetState extends State<ImagesWidget> {
 
   _onLogoutPressed() {
     BlocProvider.of<ImagesBloc>(context).add(LogoutImagesEvent());
+  }
+
+  _onNewImagePressed() {
+    final folderId = folder?.id;
+    if (folderId == null) return;
+    context.navigation.uploadImage(folderId);
   }
 }
