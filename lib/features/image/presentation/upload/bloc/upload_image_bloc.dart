@@ -25,10 +25,10 @@ class UploadImageBloc extends Bloc<UploadImageEvent, UploadImageState> {
         original: event.original,
         painted: event.painted,
       );
+      emit(UploadedImageState());
     } catch (e) {
       emit(ErrorUploadImageState(createErrorMessage(e)));
     }
-    emit(UploadedImageState());
     emit(ProgressImageState(false));
   }
 }
