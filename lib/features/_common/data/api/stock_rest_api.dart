@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:image_hoster/features/_common/data/request/access_token_request.dart';
 import 'package:image_hoster/features/auth/data/request/auth_request.dart';
 import 'package:image_hoster/features/auth/data/response/auth_response.dart';
-import 'package:image_hoster/features/folder/data/model/folder.dart';
 import 'package:image_hoster/features/folder/data/request/add_folder_request.dart';
 import 'package:image_hoster/features/folder/data/request/delete_folder_request.dart';
+import 'package:image_hoster/features/folder/data/response/get_folders_response.dart';
 import 'package:image_hoster/features/image/data/request/delete_image_request.dart';
 import 'package:image_hoster/features/image/data/request/get_images_request.dart';
 import 'package:image_hoster/features/image/data/request/upload_image_request.dart';
@@ -28,15 +28,15 @@ abstract class StockRestApi {
     @Body() AuthRequest request,
   );
 
-  @POST('$authPath/register')
+  @POST('$authPath/registration')
   Future<AuthResponse> register(
     @Body() AuthRequest request,
   );
 
-  @GET('/folders')
-  Future<List<Folder>> getFolders(@Body() AccessTokenRequest request);
+  @GET('/folder/getAll')
+  Future<GetFoldersResponse> getFolders(@Body() AccessTokenRequest request);
 
-  @POST('/create-folder')
+  @POST('/folder/create')
   Future<void> addFolder(@Body() AddFolderRequest request);
 
   @POST('/folders/get')
@@ -48,6 +48,6 @@ abstract class StockRestApi {
   @POST('/delete-image')
   Future<GetImagesResponse> deleteImage(@Body() DeleteImageRequest request);
 
-  @POST('/delete-folder')
+  @POST('/folder/delete')
   Future<GetImagesResponse> deleteFolder(@Body() DeleteFolderRequest request);
 }

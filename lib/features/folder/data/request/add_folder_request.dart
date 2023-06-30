@@ -5,6 +5,7 @@ part 'add_folder_request.g.dart';
 @JsonSerializable()
 class AddFolderRequest {
   final String token;
+  @JsonKey(name: 'folderName')
   final String name;
 
   AddFolderRequest(this.token, this.name);

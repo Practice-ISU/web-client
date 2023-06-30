@@ -22,8 +22,7 @@ class UploadImageBloc extends Bloc<UploadImageEvent, UploadImageState> {
     try {
       await _imagesRepository.upload(
         folderId: folderId,
-        original: event.original,
-        painted: event.painted,
+        file: event.painted,
       );
       emit(UploadedImageState());
     } catch (e) {

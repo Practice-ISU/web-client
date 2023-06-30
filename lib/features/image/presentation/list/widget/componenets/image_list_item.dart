@@ -31,7 +31,7 @@ class ImageListItem extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.cover,
                 child: Image.network(
-                  imageItem.original,
+                  imageItem.fileName,
                   errorBuilder: (context, child, progress) => Padding(
                     padding: const EdgeInsets.all(Dimens.md),
                     child: AppIcons.error,

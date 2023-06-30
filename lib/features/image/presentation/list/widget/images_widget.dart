@@ -108,8 +108,7 @@ class _ImagesWidgetState extends State<ImagesWidget> {
   }
 
   _onImagePressed(ImageItem imageItem) {
-    launchUrl(Uri.parse(imageItem.original));
-    launchUrl(Uri.parse(imageItem.painted));
+    launchUrl(Uri.parse(imageItem.fileName));
   }
 
   _onLogoutPressed() {

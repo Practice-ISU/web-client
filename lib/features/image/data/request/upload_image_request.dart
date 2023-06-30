@@ -6,14 +6,12 @@ part 'upload_image_request.g.dart';
 class UploadImageRequest {
   final String token;
   final int folderId;
-  final String original;
-  final String painted;
+  final String file;
 
   UploadImageRequest({
     required this.token,
     required this.folderId,
-    required this.original,
-    required this.painted,
+    required this.file,
   });
 
   factory UploadImageRequest.fromJson(Map<String, dynamic> json) =>
