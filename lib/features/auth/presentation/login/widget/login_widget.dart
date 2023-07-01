@@ -74,7 +74,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 controller: passwordController,
                 enabled: !inProgress,
                 obscureText: true,
-                obscuringCharacter: '●',
+                obscuringCharacter: '*',
                 labelText: S.current.password,
               ),
               Gap.md,
