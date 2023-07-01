@@ -1,3 +1,3 @@
 class Constants {
-  static const baseUrl = '';
+  static const baseUrl = 'http://158.160.66.21';
 }

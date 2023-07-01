@@ -33,10 +33,10 @@ abstract class StockRestApi {
     @Body() AuthRequest request,
   );
 
-  @GET('/folder/getAll')
+  @POST('/folder/getAll')
   Future<GetFoldersResponse> getFolders(@Body() AccessTokenRequest request);
 
-  @POST('/folder/create')
+  @POST('/folder/add')
   Future<void> addFolder(@Body() AddFolderRequest request);
 
   @POST('/folders/get')
