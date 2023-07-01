@@ -38,7 +38,12 @@ class ImageListItem extends StatelessWidget {
                     if (progress == null) {
                       return child;
                     }
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(Dimens.sm),
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
                   },
                 ),
               ),

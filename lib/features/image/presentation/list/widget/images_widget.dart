@@ -30,9 +30,10 @@ class _ImagesWidgetState extends State<ImagesWidget> {
   @override
   Widget build(BuildContext context) {
     return ScreenConsumer<ImagesBloc, ImagesState>(
+      padding: EdgeInsets.zero,
       listener: (context, state) {
         if (state is DownloadImagesState) {
-          launchUrl(Uri.parse(state.url));
+          launchUrl(Uri.parse(state.url), mode: LaunchMode.externalApplication);
         }
         if (state is LoadedImagesState) {
           setState(() {
@@ -118,7 +119,7 @@ class _ImagesWidgetState extends State<ImagesWidget> {
   }
 
   _onImagePressed(ImageItem imageItem) {
-    launchUrl(Uri.parse(imageItem.fileName));
+    launchUrl(Uri.parse(imageItem.fileName), mode: LaunchMode.externalApplication);
   }
 
   _onLogoutPressed() {

@@ -15,8 +15,9 @@ class _FileView extends StatelessWidget {
         onPressed: () async {
           final files = await FilePicker.platform.pickFiles(
             type: FileType.image,
+            withData: true,
           );
-          if (files?.files.first.bytes != null) {
+          if (files?.files.firstOrNull?.bytes != null) {
             onUploaded.call(files!.files.first.bytes!);
           }
         },
