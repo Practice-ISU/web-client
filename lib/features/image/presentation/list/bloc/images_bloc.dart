@@ -10,7 +10,6 @@ part 'images_event.dart';
 part 'images_state.dart';
 
 class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
-
   late final AuthRepository _authRepository = Injector.instance.resolve();
   late final ImagesRepository _imagesRepository = Injector.instance.resolve();
   final int folderId;
@@ -19,6 +18,7 @@ class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
     on<LoadImagesEvent>(_load);
     on<DeleteImageEvent>(_delete);
     on<LogoutImagesEvent>(_logout);
+    on<DownloadEvent>(_download);
   }
 
   _load(LoadImagesEvent event, Emitter<ImagesState> emit) async {
@@ -34,6 +34,17 @@ class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
 
   _logout(LogoutImagesEvent event, Emitter<ImagesState> emit) async {
     await _authRepository.logout();
+  }
+
+  _download(DownloadEvent event, Emitter<ImagesState> emit) async {
+    emit(ProgressImagesState(true));
+    try {
+      final result = await _imagesRepository.downloadImages(folderId);
+      emit(DownloadImagesState(result.url));
+    } catch (e) {
+      emit(ErrorImagesState(createErrorMessage(e)));
+    }
+    emit(ProgressImagesState(false));
   }
 
   _delete(DeleteImageEvent event, Emitter<ImagesState> emit) async {

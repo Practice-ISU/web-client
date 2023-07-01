@@ -19,3 +19,9 @@ class LoadedImagesState extends ImagesState {
 
   LoadedImagesState(this.images);
 }
+
+class DownloadImagesState extends ImagesState {
+  final String url;
+
+  DownloadImagesState(this.url);
+}

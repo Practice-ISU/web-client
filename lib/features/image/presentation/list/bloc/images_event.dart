@@ -11,3 +11,7 @@ class DeleteImageEvent extends ImagesEvent {
 
   DeleteImageEvent(this.id);
 }
+
+class DownloadEvent extends ImagesEvent {
+  DownloadEvent();
+}

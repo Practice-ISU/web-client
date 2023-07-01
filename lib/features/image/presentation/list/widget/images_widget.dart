@@ -31,6 +31,9 @@ class _ImagesWidgetState extends State<ImagesWidget> {
   Widget build(BuildContext context) {
     return ScreenConsumer<ImagesBloc, ImagesState>(
       listener: (context, state) {
+        if (state is DownloadImagesState) {
+          launchUrl(Uri.parse(state.url));
+        }
         if (state is LoadedImagesState) {
           setState(() {
             folder = state.images.folder;
@@ -63,6 +66,14 @@ class _ImagesWidgetState extends State<ImagesWidget> {
               actions: [
                 IconButton(
                   onPressed: () {
+                    _onDownloadPressed();
+                  },
+                  splashRadius: Dimens.appBarSplashRadius,
+                  icon: AppIcons.zip,
+                ),
+                Gap.md,
+                IconButton(
+                  onPressed: () {
                     _onNewImagePressed();
                   },
                   splashRadius: Dimens.appBarSplashRadius,
@@ -81,8 +92,7 @@ class _ImagesWidgetState extends State<ImagesWidget> {
             )
           : null,
       builder: (context, state) {
-        final int count =
-            (MediaQuery.of(context).size.width / (200 + Dimens.md)).floor();
+        final int count = (MediaQuery.of(context).size.width / (200 + Dimens.md)).floor();
         return GridView.count(
           padding: const EdgeInsets.all(Dimens.md),
           mainAxisSpacing: Dimens.md,
@@ -119,6 +129,10 @@ class _ImagesWidgetState extends State<ImagesWidget> {
     final folderId = folder?.id;
     if (folderId == null) return;
     context.navigation.uploadImage(folderId);
+  }
+
+  _onDownloadPressed() {
+    BlocProvider.of<ImagesBloc>(context).add(DownloadEvent());
   }
 
   _onImageDelete(BuildContext parentContext, ImageItem image) {
