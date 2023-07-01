@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_hoster/features/image/data/model/image_item.dart';
 import 'package:image_hoster/ui/kit/dimens.dart';
-import 'package:image_hoster/ui/kit/gap.dart';
 import 'package:image_hoster/ui/kit/icons.dart';
 
 class ImageListItem extends StatelessWidget {
@@ -23,8 +22,7 @@ class ImageListItem extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimens.sm),
-            border: Border.all(
-                width: 1, color: Theme.of(context).colorScheme.surface)),
+            border: Border.all(width: 1, color: Theme.of(context).colorScheme.surface)),
         child: Stack(
           children: [
             Positioned.fill(
@@ -32,7 +30,7 @@ class ImageListItem extends StatelessWidget {
                 fit: BoxFit.cover,
                 child: Image.network(
                   imageItem.fileName,
-                  errorBuilder: (context, child, progress) => Padding(
+                  errorBuilder: (context, child, trace) => Padding(
                     padding: const EdgeInsets.all(Dimens.md),
                     child: AppIcons.error,
                   ),
@@ -40,23 +38,7 @@ class ImageListItem extends StatelessWidget {
                     if (progress == null) {
                       return child;
                     }
-                    final progressRatio = progress.expectedTotalBytes != null
-                        ? (progress.cumulativeBytesLoaded /
-                            progress.expectedTotalBytes!)
-                        : null;
-
-                    final progressPercent = progressRatio != null
-                        ? (progressRatio * 100).floor()
-                        : null;
-
-                    return Center(
-                        child: Column(children: [
-                      const CircularProgressIndicator(),
-                      if (progressPercent != null) ...[
-                        Gap.sm,
-                        Text('$progressPercent%')
-                      ]
-                    ]));
+                    return const Center(child: CircularProgressIndicator());
                   },
                 ),
               ),

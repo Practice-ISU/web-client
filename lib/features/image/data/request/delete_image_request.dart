@@ -5,6 +5,7 @@ part 'delete_image_request.g.dart';
 @JsonSerializable()
 class DeleteImageRequest {
   final String token;
+  @JsonKey(name: 'fileId')
   final int id;
 
   DeleteImageRequest(this.token, this.id);

@@ -7,6 +7,7 @@ part 'get_images_response.g.dart';
 @JsonSerializable()
 class GetImagesResponse {
   final Folder folder;
+  @JsonKey(name: 'files')
   final List<ImageItem> images;
 
   GetImagesResponse(this.folder, this.images);

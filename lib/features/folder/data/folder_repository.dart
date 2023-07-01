@@ -19,7 +19,7 @@ class FolderRepository {
   Future<void> addFolder(String name) async => _api.addFolder(
       AddFolderRequest(await SessionStore.instance.accessToken, name));
 
-  Future<void> deleteFolder(int folderId) async => _api.deleteFolder(
+  Future<dynamic> deleteFolder(int folderId) async => _api.deleteFolder(
         DeleteFolderRequest(await SessionStore.instance.accessToken, folderId),
       );
 }

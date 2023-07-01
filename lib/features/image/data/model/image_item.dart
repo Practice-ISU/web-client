@@ -5,6 +5,7 @@ part 'image_item.g.dart';
 @JsonSerializable()
 class ImageItem {
   final int id;
+  @JsonKey(name: 'url')
   final String fileName;
 
   ImageItem(this.id, this.fileName);

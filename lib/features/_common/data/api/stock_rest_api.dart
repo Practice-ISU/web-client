@@ -8,6 +8,7 @@ import 'package:image_hoster/features/folder/data/response/get_folders_response.
 import 'package:image_hoster/features/image/data/request/delete_image_request.dart';
 import 'package:image_hoster/features/image/data/request/get_images_request.dart';
 import 'package:image_hoster/features/image/data/request/upload_image_request.dart';
+import 'package:image_hoster/features/image/data/response/download_images_response.dart';
 import 'package:image_hoster/features/image/data/response/get_images_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -39,15 +40,18 @@ abstract class StockRestApi {
   @POST('/folder/add')
   Future<void> addFolder(@Body() AddFolderRequest request);
 
-  @POST('/folders/get')
+  @POST('/file/getAll')
   Future<GetImagesResponse> getImages(@Body() GetImagesRequest request);
 
-  @POST('/upload-image')
-  Future<GetImagesResponse> uploadImage(@Body() UploadImageRequest request);
+  @POST('/file/add')
+  Future<dynamic> uploadImage(@Body() UploadImageRequest request);
 
-  @POST('/delete-image')
-  Future<GetImagesResponse> deleteImage(@Body() DeleteImageRequest request);
+  @POST('/file/delete')
+  Future<dynamic> deleteImage(@Body() DeleteImageRequest request);
+
+  @POST('/file/getAllZip')
+  Future<DownloadImagesResponse> downloadImages(@Body() GetImagesRequest request);
 
   @POST('/folder/delete')
-  Future<GetImagesResponse> deleteFolder(@Body() DeleteFolderRequest request);
+  Future<dynamic> deleteFolder(@Body() DeleteFolderRequest request);
 }
