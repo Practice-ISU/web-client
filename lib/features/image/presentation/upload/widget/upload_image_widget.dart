@@ -117,17 +117,13 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
                       }
                     }
                   },
-                  child: originalImage == null
-                      ? Text(S.current.cancelButton)
-                      : Text(S.current.clear),
+                  child: originalImage == null ? Text(S.current.cancelButton) : Text(S.current.clear),
                 )),
                 Gap.md,
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _onNextPressed(),
-                    child: currentPage == 1
-                        ? Text(S.current.upload)
-                        : Text(S.current.next),
+                    child: currentPage == 1 ? Text(S.current.upload) : Text(S.current.next),
                   ),
                 ),
               ],
@@ -143,16 +139,14 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
     setState(() {
       currentPage++;
     });
-    await pageController.nextPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+    await pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 
   _previousPage() async {
     setState(() {
       currentPage--;
     });
-    await pageController.previousPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+    await pageController.previousPage(duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 
   VoidCallback? _onNextPressed() {

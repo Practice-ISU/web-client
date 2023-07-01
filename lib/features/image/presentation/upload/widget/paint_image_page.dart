@@ -27,6 +27,8 @@ class PaintImagePageState extends State<PaintImagePage> {
     LogicalKeyboardKey.shiftRight,
   ];
 
+  ImageOffset? imageOffset;
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -42,9 +44,7 @@ class PaintImagePageState extends State<PaintImagePage> {
         height: screenSize.height,
         child: GestureDetector(
           onPanDown: (details) {
-            final isShiftPressed = RawKeyboard.instance.keysPressed
-                .where((it) => shiftKeys.contains(it))
-                .isNotEmpty;
+            final isShiftPressed = RawKeyboard.instance.keysPressed.where((it) => shiftKeys.contains(it)).isNotEmpty;
 
             final drawNewLine = newLine && !isShiftPressed;
             setState(() {
@@ -53,9 +53,7 @@ class PaintImagePageState extends State<PaintImagePage> {
             widget.onDraw.call(PointInfo(details.localPosition, drawNewLine));
           },
           onPanUpdate: (details) {
-            final isShiftPressed = RawKeyboard.instance.keysPressed
-                .where((it) => shiftKeys.contains(it))
-                .isNotEmpty;
+            final isShiftPressed = RawKeyboard.instance.keysPressed.where((it) => shiftKeys.contains(it)).isNotEmpty;
 
             final drawNewLine = newLine && !isShiftPressed;
             widget.onDraw.call(PointInfo(details.localPosition, drawNewLine));
@@ -68,7 +66,12 @@ class PaintImagePageState extends State<PaintImagePage> {
           child: CustomPaint(
             size: imageSize,
             painter: ImageEditor(
-                image: widget.image, points: widget.points, scaleImage: true),
+                image: widget.image,
+                points: widget.points,
+                scaleImage: true,
+                onOffsetChanged: (offset) {
+                  imageOffset = offset;
+                }),
             child: Container(),
           ),
         ),
@@ -80,10 +83,22 @@ class PaintImagePageState extends State<PaintImagePage> {
     ui.PictureRecorder recorder = ui.PictureRecorder();
     Canvas canvas = Canvas(recorder);
 
+    final scaleFactor = imageOffset?.scaleFactor ?? 1;
+
+    final points = widget.points
+        .map((e) => PointInfo(
+            Offset(
+              (e.offset.dx - (imageOffset?.offsetX ?? 0)) / scaleFactor,
+              (e.offset.dy - (imageOffset?.offsetY ?? 0)) / scaleFactor,
+            ),
+            e.newLine))
+        .toList();
+
     var painter = ImageEditor(
-      points: widget.points,
+      points: points,
       image: widget.image,
       scaleImage: false,
+      scale: 1 / scaleFactor,
     );
 
     painter.paint(
@@ -114,18 +129,29 @@ class PointInfo {
   PointInfo(this.offset, this.newLine);
 }
 
+class ImageOffset {
+  final double scaleFactor;
+  final double offsetX;
+  final double offsetY;
+  final double width;
+  final double height;
+
+  ImageOffset(this.scaleFactor, this.offsetX, this.offsetY, this.width, this.height);
+}
+
 class ImageEditor extends CustomPainter {
-  ImageEditor(
-      {required this.image, required this.points, this.scaleImage = true});
+  ImageEditor({required this.image, required this.points, this.scaleImage = true, this.onOffsetChanged, this.scale = 1});
 
   final ui.Image image;
   final List<PointInfo> points;
   final bool scaleImage;
+  final ValueChanged<ImageOffset>? onOffsetChanged;
+  final double scale;
 
-  final Paint painter = Paint()
+  late final Paint painter = Paint()
     ..color = Colors.red
     ..style = PaintingStyle.fill
-    ..strokeWidth = 6
+    ..strokeWidth = scale * 6
     ..filterQuality = FilterQuality.high;
 
   @override
@@ -140,15 +166,13 @@ class ImageEditor extends CustomPainter {
 
     if (scaleFactor > 1) scaleFactor = 1;
 
-    final double scaledWidth =
-        scaleImage ? imageSize.width * scaleFactor : imageSize.width;
-    final double scaledHeight =
-        scaleImage ? imageSize.height * scaleFactor : imageSize.height;
+    final double scaledWidth = scaleImage ? imageSize.width * scaleFactor : imageSize.width;
+    final double scaledHeight = scaleImage ? imageSize.height * scaleFactor : imageSize.height;
 
-    final double offsetX =
-        scaleImage ? (canvasSize.width - scaledWidth) / 2 : 0;
-    final double offsetY =
-        scaleImage ? (canvasSize.height - scaledHeight) / 2 : 0;
+    final double offsetX = scaleImage ? (canvasSize.width - scaledWidth) / 2 : 0;
+    final double offsetY = scaleImage ? (canvasSize.height - scaledHeight) / 2 : 0;
+
+    onOffsetChanged?.call(ImageOffset(scaleFactor, offsetX, offsetY, scaledWidth, scaledHeight));
 
     final Rect imageRect = Rect.fromLTWH(
       offsetX,
@@ -158,11 +182,7 @@ class ImageEditor extends CustomPainter {
     );
 
     canvas.clipRect(Rect.fromLTWH(offsetX, offsetY, scaledWidth, scaledHeight));
-    canvas.drawImageRect(
-        image,
-        Rect.fromLTRB(0, 0, imageSize.width, imageSize.height),
-        imageRect,
-        Paint());
+    canvas.drawImageRect(image, Rect.fromLTRB(0, 0, imageSize.width, imageSize.height), imageRect, Paint());
 
     for ((int, PointInfo) offset in points.indexed) {
       if (offset.$1 > 0 && !offset.$2.newLine) {

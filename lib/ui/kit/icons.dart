@@ -18,4 +18,9 @@ class AppIcons {
   );
 
   static final plusCircle = SvgPicture.asset('assets/icons/plus_circle.svg');
+  static final zip = SvgPicture.asset(
+    'assets/icons/zip.svg',
+    width: 24,
+    height: 24,
+  );
 }
